@@ -1,0 +1,96 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+body{
+    background-image: url("../images/rain-back.gif");
+    background-size: cover;
+}
+header{
+    background-color: rgb(54, 54, 54);
+    color: rgb(223, 223, 223);
+    padding: 15px;
+}
+header h1{
+    padding-left: 2%;
+    font-size: 4vw;
+}
+#search-tools, #history, #today, #five-days{
+    margin: 5% 0;
+    margin-left: 2vw;
+    background-color: whitesmoke;
+    padding: 1vw 2vw 1vw 1vw;
+    border-radius: 15%;
+}
+#today, #five-days{
+    border-radius: 10%;
+    margin-right: 10%;
+}
+#search-tools{
+    text-align: center;
+    justify-content: center;
+}
+#search-tools i{
+    background-color: rgb(11, 150, 230);
+    border-radius: 50%;
+    padding: 4px;
+    color: white;
+}
+#search-tools i:hover{
+    background-color: red;
+}
+#history{
+    height: 300px;
+    overflow-y: scroll;
+    border-top-right-radius: 3%;
+    border-bottom-right-radius: 3%;
+}
+#history p{
+    margin: 0;
+    padding: 5%;
+}
+#history p:hover{
+    background-color: royalblue;
+    color: whitesmoke;
+}
+::-webkit-scrollbar{
+    width: fit-content;
+   
+}
+::-webkit-scrollbar-track{
+    background-color: rgb(223, 223, 223);
+    border-radius: 2%;
+}
+::-webkit-scrollbar-thumb{
+    background-color: rgba(10, 6, 6, 0.5);
+    border-top-left-radius: 2%;
+    border-bottom-left-radius: 2%;
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color: rgba(10, 6, 6, 1);
+}
+#history h3{
+    border-bottom: rgba(10, 6, 6, 0.5) solid 2px;
+    padding-bottom: 0.8vw;
+    text-align: center;
+}
+#history p{
+    border-bottom: rgba(54, 54, 54, 0.5) solid 2px;
+    text-align: center;
+    padding-bottom: 1vw;
+}
+#today{
+    text-align: center;
+
+}
+#five-days{
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2vw;
+    text-align: center;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Weather Forecast</title>
+</head>
+<body>
+    <header>
+        <h1>Weather Forecast</h1>
+    </header>
+    
+    <div class="row">
+        <div class="search-history col-lg-3 col-12">
+            <div id="search-tools">
+                <h3>Search for a City:</h3>
+                <input name="City" type="text" id="city"/>
+                <i class="fas fa-search" id="search-button"></i>
+                <h6 style="display: none;" id="warning"></h6>
+            </div>
+            <div id="history">
+                <h3>History</h3>
+                <p id="history-entry">Sample-City</p>
+                <p>Sample-City</p>
+                <p>Sample-City</p>
+                <p>Sample-City</p>
+                <p>Sample-City</p>
+            </div>
+        </div>
+
+        <div class="forecast-data col-lg-9 col-12" id = "all-forecasts">
+            <div id = "today">
+                <h3>Sarasota, FL (11/22/2020)</h3>
+                <p>tempterature: 99f*<br/>
+                    humidity: 99%<br/>
+                    wind speed: 5 mph<br/>
+                    <span>UV index: 5.9</span>
+                </p>
+            </div>
+            <div id = "five-days">
+                <!-- divs -->
+               <div>
+                   <p><span style="font-weight: bold;">08/23/2020</span><br/>
+                    temp: 88f*<br/>
+                    humidity: 88%
+                   </p>
+               </div>
+               <div>
+                <p><span style="font-weight: bold;">08/23/2020</span><br/>
+                    temp: 88f*<br/>
+                    humidity: 88%
+                   </p>
+               </div>
+               <div>
+                <p><span style="font-weight: bold;">08/23/2020</span><br/>
+                    temp: 88f*<br/>
+                    humidity: 88%
+                   </p>
+               </div>
+               <div>
+                    <p><span style="font-weight: bold;">08/23/2020</span><br/>
+                    temp: 88f*<br/>
+                    humidity: 88%
+                   </p>
+               </div>
+               <div>
+                <p><span style="font-weight: bold;">08/23/2020</span><br/>
+                    temp: 88f*<br/>
+                    humidity: 88%
+                   </p>
+               </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/8c9cfad0f7.js" crossorigin="anonymous"></script>
+    <script src="./assets/scripts/script.js"></script>
+</body>
+</html>

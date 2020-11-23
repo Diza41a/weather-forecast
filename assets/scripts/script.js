@@ -51,24 +51,30 @@ var displayTodaysForecast = function(event){
         function(response){
             console.log(response);
             
+            //Calv to fahrenheit T(K) × 9/5 - 459.67
+            var fahr = Math.round(response.main.temp * 9/5 - 459.67);
+
+            var todaysDataEl = document.querySelector(".forecast-data");
+            todaysDataEl.innerHTML = "";
+            var cityDate = "<h3>" + city + " (" + moment().format("L") + ")" + 
+            " <img src='http://openweathermap.org/img/wn/" + response.weather[0].icon + ".png' style='border-radius: 50%;" +
+            "background-color: darkgray'/> </h3>";
+            var other = "<p> temperature: " + fahr + "\u00B0f<br/>" +
+                "humidity: " + response.main.humidity + "%<br/>" +
+                "wind speed: " + response.wind.speed + " mph<br/>" +
+                "<span data-uv = '3.5'> UV index: 3.5 </span></p>"; 
+                todaysDataEl.innerHTML = "<div id='today'>" + cityDate + other + "</div>";
+                todaysDataEl.removeAttribute("style");
+                console.log(todaysDataEl);
+
+            
         }
     )
 }
 
+
 //api-key = c9e35d72613b8421a57cb99446bd1d2f
 //kelvin to fahrenheit (xK − 273.15) × 9/5 + 32
-
-// var check = function(response){
-//     fetch("https://api.openweathermap.org/data/2.5/weather?q=North+Port&appid=c9e35d72613b8421a57cb99446bd1d2f")
-//     .then(function(response){
-//         if (response.ok)
-//         {
-//             console.log(response);
-//         }
-//     })
-// }
-
-// check();
 
 searchEls.addEventListener("click", displayTodaysForecast);
 searchBtn.addEventListener("click", displayTodaysForecast);

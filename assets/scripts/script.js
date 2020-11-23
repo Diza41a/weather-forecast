@@ -15,20 +15,30 @@ var getHistoryItems = function(){
     }
     else{
         historyItems = [];
-        localStorage.setItem("weather_search_history",JSON.stringify(historyItems));
+        localStorage.setItem("weather_search_history","[]");
     }
-    historyEls.innerHTML = "<h3>Search for a City:</h3>";
+    historyEls.innerHTML = "<h3>History</h3>";
     for (var i = 0; i < historyItems.length; i++)
     {
         var historyEntry = document.createElement("p");
+        historyEntry.id = "history-entry";
+        historyEntry.textContent = historyItems[i];
+        historyEls.appendChild(historyEntry);
     }
-};
+}
 var setHistoryItems = function(city){
-    if (localStorage.getItem("weather_search_history") !== null && localStorage.getItem("weather_search_history") !== undefined)
+    // if (localStorage.getItem("weather_search_history") !== null && localStorage.getItem("weather_search_history") !== undefined)
+    // {
+    //     localStorage.setItem("weather_search_history",JSON.stringify(historyItems));
+    // }
+    // historyItems = JSON.parse(localStorage.getItem("weather_search_history"));
+    if (historyItems.includes(city))
     {
-        historyItems = JSON.parse(localStorage.getItem("weather_search_history"));
+        return;
     }
     historyItems.push(city);
+    localStorage.setItem("weather_search_history", JSON.stringify(historyItems));
+    console.log(localStorage.getItem("weather_search_history"));
 }
 
 var getUserInput = function(event){
@@ -75,7 +85,7 @@ var displayTodaysForecast = function(event){
     })
     .then(
         function(response){
-            console.log(response);
+            // console.log(response);
             
             //Calv to fahrenheit T(K) × 9/5 - 459.67
             var fahr = Math.round(response.main.temp * 9/5 - 459.67);
@@ -89,14 +99,13 @@ var displayTodaysForecast = function(event){
                 "wind speed: " + response.wind.speed + " mph<br/></p>"; 
                 forecastsDataEl.innerHTML = "<div id='today'>" + cityDate + other + "</div>";
                 forecastsDataEl.removeAttribute("style");
-                
-            displayFutureForecasts(response.coord.lon, response.coord.lat, forecastsDataEl.querySelector("#current-day"));
+            displayFutureForecasts(response.coord.lon, response.coord.lat, forecastsDataEl.querySelector("#current-day"), city);
             
         }
     )
 }
 
-var displayFutureForecasts = function(lon, lat, currentDayEl){
+var displayFutureForecasts = function(lon, lat, currentDayEl, city){
     apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lon=" + lon + "&lat=" + lat + 
     "&exclude=hourly,alerts,minutely&appid=c9e35d72613b8421a57cb99446bd1d2f";
     
@@ -127,15 +136,6 @@ var displayFutureForecasts = function(lon, lat, currentDayEl){
         uvEl.textContent = "UV index: " + data.current.uvi;
         currentDayEl.appendChild(uvEl);
 
-        //forecast for next 5 days
-        // <div id = "five-days">
-        //         <!-- divs -->
-        //        <div>
-        //            <p><span style="font-weight: bold;">08/23/2020</span><br/>
-        //             temp: 88f*<br/>
-        //             humidity: 88%
-        //            </p>
-        //        </div>
         console.log(data);
         var fiveDaysWrapper = document.createElement("div");
         fiveDaysWrapper.id = "five-days";
@@ -144,18 +144,23 @@ var displayFutureForecasts = function(lon, lat, currentDayEl){
             var fahr = Math.round(data.daily[i-1].temp.day * 9/5 - 459.67);
             var fiveDaysData = "<div><p><span style='font-weight: bold;'>" + moment().add(1, "day").format("L") + 
             "</span><br/> temp: " + fahr + "\u00B0f<br/> humidity: " + data.daily[i-1].humidity + "%</p></div>";
-            console.log(fiveDaysData);
+            // console.log(fiveDaysData);
             fiveDaysWrapper.innerHTML += fiveDaysData;
-            console.log(fiveDaysWrapper.innerHTML);
-            console.log(data.daily[i-1].humidity);
+            // console.log(fiveDaysWrapper.innerHTML);
+            // console.log(data.daily[i-1].humidity);
         }
         forecastsDataEl.appendChild(fiveDaysWrapper);
+
+        setHistoryItems(city);
+        getHistoryItems();
     });
 }
 
 //"<span data-uv = '3.5'> UV index: 3.5 </span>
 //api-key = c9e35d72613b8421a57cb99446bd1d2f
 //kelvin to fahrenheit (xK − 273.15) × 9/5 + 32
+
+getHistoryItems();
 
 historyEls.addEventListener("click", displayTodaysForecast);
 searchBtn.addEventListener("click", displayTodaysForecast);

@@ -80,6 +80,7 @@ header h1{
     border-bottom: rgba(54, 54, 54, 0.5) solid 2px;
     text-align: center;
     padding-bottom: 1vw;
+    font-size: 21px;
 }
 #today{
     text-align: center;

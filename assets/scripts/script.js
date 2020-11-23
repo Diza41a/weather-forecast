@@ -142,7 +142,7 @@ var displayFutureForecasts = function(lon, lat, currentDayEl, city){
         for(var i = 1; i < 5; i++)
         {
             var fahr = Math.round(data.daily[i-1].temp.day * 9/5 - 459.67);
-            var fiveDaysData = "<div><p><span style='font-weight: bold;'>" + moment().add(1, "day").format("L") + 
+            var fiveDaysData = "<div><p><span style='font-weight: bold;'>" + moment().add(i, "day").format("L") + 
             "</span><br/> temp: " + fahr + "\u00B0f<br/> humidity: " + data.daily[i-1].humidity + "%</p></div>";
             // console.log(fiveDaysData);
             fiveDaysWrapper.innerHTML += fiveDaysData;
@@ -150,6 +150,18 @@ var displayFutureForecasts = function(lon, lat, currentDayEl, city){
             // console.log(data.daily[i-1].humidity);
         }
         forecastsDataEl.appendChild(fiveDaysWrapper);
+
+        console.log(data.current.weather[0].main);
+        if (data.current.weather[0].main !== "Clouds" && data.current.weather[0].main !== "Rain" &&
+        data.current.weather[0].main !== "Haze")
+        {
+            document.querySelector("body").setAttribute("style","background-image:url(./assets/images/clear-back.gif)");
+        }
+        else
+        {
+            document.querySelector("body").setAttribute("style","background-image:url(./assets/images/rain-back.gif)");
+        }
+            document.querySelector("body").style.backgroundSize = "cover";
 
         setHistoryItems(city);
         getHistoryItems();

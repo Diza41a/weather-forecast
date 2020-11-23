@@ -6,7 +6,30 @@ var forecastsDataEl = document.querySelector(".forecast-data");
 
 var warningEl = document.querySelector("#warning");
 
+var historyItems;
 
+var getHistoryItems = function(){
+    if (localStorage.getItem("weather_search_history") !== null && localStorage.getItem("weather_search_history") !== undefined)
+    {
+        historyItems = JSON.parse(localStorage.getItem("weather_search_history"));
+    }
+    else{
+        historyItems = [];
+        localStorage.setItem("weather_search_history",JSON.stringify(historyItems));
+    }
+    historyEls.innerHTML = "<h3>Search for a City:</h3>";
+    for (var i = 0; i < historyItems.length; i++)
+    {
+        var historyEntry = document.createElement("p");
+    }
+};
+var setHistoryItems = function(city){
+    if (localStorage.getItem("weather_search_history") !== null && localStorage.getItem("weather_search_history") !== undefined)
+    {
+        historyItems = JSON.parse(localStorage.getItem("weather_search_history"));
+    }
+    historyItems.push(city);
+}
 
 var getUserInput = function(event){
     warningEl.setAttribute("style", "display: none");
